@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  title="LaterBuy Configuration" id="laterbuyConfig"
+  buttons="accept"
+  ondialogaccept="lbConfig.onOK();"
+  >
+  
+  <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"/>
+  <script type="application/x-javascript" src="chrome://laterbuy/content/options.js"/>
+  <script type="application/x-javascript" src="chrome://laterbuy/content/utils.js"/>
+
+  <vbox style="max-width: 500px; min-width: 500px">
+    <tabbox>
+      <tabs>
+        <tab label="Main Options"/>
+      </tabs>
+      <tabpanels>
+        <tabpanel id="store-tab">
+          <vbox>
+           <hbox>
+             <label value="twitter username"/><textbox id="twittername"/>
+           </hbox>
+           <hbox>
+            <label value="email address"/><textbox id="emailaddress"/>
+           </hbox>
+          </vbox>
+        </tabpanel>
+      </tabpanels>
+    </tabbox>
+  <spacer height="10" />
+  <description value="You must reload web page for changes to take effect" />
+  </vbox>
+</dialog>

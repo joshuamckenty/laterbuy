@@ -1,0 +1,4 @@
+overlay chrome://browser/content/browser.xul chrome://laterbuy/content/browserOverlay.xul
+
+content  laterbuy    chrome/content/
+skin     laterbuy    classic/1.0	chrome/skin/

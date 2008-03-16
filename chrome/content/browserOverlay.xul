@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="laterbuy-overlay">
+  <script type="application/x-javascript"
+          src="chrome://laterbuy/content/laterbuy.js" />
+  <script type="application/x-javascript"
+          src="chrome://laterbuy/content/utils.js" />
+  <popup id="contentAreaContextMenu">
+    <menuitem id="laterbuy-menu-item"
+      label="Buy This Later" oncommand="laterbuyPopupMenu()" />
+  </popup>
+</overlay>

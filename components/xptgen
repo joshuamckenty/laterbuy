@@ -1,0 +1,16 @@
+#!/bin/bash -x
+
+
+export MOZBINPATH="/Users/joshua/flocktrunk/objectdir/dist/bin"
+export MOZIDLPATH="/Users/joshua/flocktrunk/src/flock/mozilla/xpcom/base"
+
+if [[ ! -d $MOZBINPATH ]]; then
+    echo "MOZBINPATH environment variable must point to a directory containing xpidl, either in a Gecko SDK ($GECKOSDKDIR/bin/) or a Mozilla build obj tree ($MOZOBJDIR/dist/bin)"
+    exit 1
+fi
+if [[ ! -d $MOZIDLPATH ]]; then
+    echo "MOZIDLPATH environment variable must point to a directory containing core XPIDL files, either in a Gecko SDK ($GECKOSDKDIR/idl) or in a Mozilla source tree ($MOZSRCDIR/xpcom/base)"
+    exit 1
+fi
+
+$MOZBINPATH/xpidl -m typelib -I $MOZIDLPATH -o bbIBookBurroService bbIBookBurroService.idl
