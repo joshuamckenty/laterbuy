@@ -19,9 +19,9 @@
       <tabpanels>
         <tabpanel id="store-tab">
           <vbox>
-           <hbox>
-             <label value="twitter username"/><textbox id="twittername"/>
-           </hbox>
+            <description>
+              The first time you use LaterBuy, we'll send a confirmation email to this address.
+            </description>
            <hbox>
             <label value="email address"/><textbox id="emailaddress"/>
            </hbox>
@@ -30,6 +30,6 @@
       </tabpanels>
     </tabbox>
   <spacer height="10" />
-  <description value="You must reload web page for changes to take effect" />
+  <label value="Visit http://laterbuy.cognition.ca to change your notifications" class="text-link" onclick="lbConfig.visit_user_page();"/>
   </vbox>
 </dialog>
