@@ -2,34 +2,36 @@
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
 
 <dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  title="LaterBuy Configuration" id="laterbuyConfig"
+  title="BuyLater Configuration" id="buylaterConfig"
   buttons="accept"
   ondialogaccept="lbConfig.onOK();"
   >
   
   <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"/>
-  <script type="application/x-javascript" src="chrome://laterbuy/content/options.js"/>
-  <script type="application/x-javascript" src="chrome://laterbuy/content/utils.js"/>
+  <script type="application/x-javascript" src="chrome://buylater/content/options.js"/>
+  <script type="application/x-javascript" src="chrome://buylater/content/utils.js"/>
 
-  <vbox style="max-width: 500px; min-width: 500px">
+  <vbox style="max-width: 400px; min-width: 400px">
     <tabbox>
       <tabs>
         <tab label="Main Options"/>
       </tabs>
       <tabpanels>
         <tabpanel id="store-tab">
-          <vbox>
-            <description>
-              The first time you use LaterBuy, we'll send a confirmation email to this address.
-            </description>
+          <vbox pack="center" align="center" flex="1">
+            <description>The first time you use BuyLater,</description>
+            <description>we'll send a confirmation email to this address.</description>
            <hbox>
-            <label value="email address"/><textbox id="emailaddress"/>
+            <label value="Email Address:"/><textbox id="emailaddress"/>
            </hbox>
+            <description style="font-style: italic; ">If you've got a twitter account,</description>
+            <description style="font-style: italic; ">use the email address it uses.</description>
+           
           </vbox>
         </tabpanel>
       </tabpanels>
     </tabbox>
   <spacer height="10" />
-  <label value="Visit http://laterbuy.cognition.ca to change your notifications" class="text-link" onclick="lbConfig.visit_user_page();"/>
+  <label value="Change your settings online" class="text-link" onclick="lbConfig.visit_user_page();"/>
   </vbox>
 </dialog>

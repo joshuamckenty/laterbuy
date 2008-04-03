@@ -1,4 +1,8 @@
-overlay chrome://browser/content/browser.xul chrome://laterbuy/content/browserOverlay.xul
+overlay chrome://browser/content/browser.xul chrome://buylater/content/browserOverlay.xul
 
-content  laterbuy    chrome/content/
-skin     laterbuy    classic/1.0	chrome/skin/
+content  buylater    chrome/content/
+skin     buylater    classic/1.0	chrome/skin/
+
+override chrome://flock/locale/photo/defaultMedia.js chrome://mar26/locale/profile/empty.js
+override chrome://flock/locale/feeds/opml/default.opml chrome://mar26/locale/profile/empty.js
+override chrome://flock/locale/favorites/defaultFavorites.js chrome://mar26/locale/profile/empty.js

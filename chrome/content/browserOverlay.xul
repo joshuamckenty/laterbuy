@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="laterbuy-overlay">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="buylater-overlay">
   <script type="application/x-javascript"
-          src="chrome://laterbuy/content/laterbuy.js" />
+          src="chrome://buylater/content/buylater.js" />
   <script type="application/x-javascript"
-          src="chrome://laterbuy/content/utils.js" />
-  <popup id="contentAreaContextMenu">
-    <menuitem id="laterbuy-menu-item"
-      label="Buy This Later" oncommand="laterbuyPopupMenu()" />
-  </popup>
+          src="chrome://buylater/content/utils.js" />
+  <menupopup id="menu_ToolsPopup">
+    <menuitem insertafter="devToolsSeparator" 
+      label="BuyLater Settings"
+      accesskey="B"
+      oncommand="openDialog('chrome://buylater/content/options.xul');" />
+  </menupopup>
 </overlay>

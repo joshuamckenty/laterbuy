@@ -1,27 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-  <RDF:Description RDF:about="urn:mozilla:install-manifest">
-    <em:name>LaterBuy - Buy it Later</em:name>
-    <em:id>{5bf4e017-d36a-4fc2-b99e-e9abb6b1f2f4}</em:id>
-    <em:version>0.40</em:version>
-    <em:description>Let us tell you when it's back in stock</em:description>
-    <em:creator>Joshua McKenty; http://cognition.ca</em:creator>
-    <em:homepageURL>http://laterbuy.cognition.ca</em:homepageURL>
-    <em:updateURL>https://laterbuy.cognition.ca/update.rdf</em:updateURL>
-    <em:optionsURL>chrome://laterbuy/content/options.xul</em:optionsURL>
-    <em:targetApplication>
-      <RDF:Description>
-        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>1.5</em:minVersion>
-        <em:maxVersion>3.0.*</em:maxVersion>
-      </RDF:Description>
-    </em:targetApplication>
-    <em:targetApplication>
-      <Description>
-        <em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
-        <em:minVersion>0.5</em:minVersion>
-        <em:maxVersion>1.4.*</em:maxVersion>
-      </Description>
-    </em:targetApplication>
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="rdf:#$C6+5G"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="1.5"
+                   em:maxVersion="3.0pre" />
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:name="BuyLater - Buy it Later"
+                   em:id="{5bf4e017-d36a-4fc2-b99e-e9abb6b1f2f4}"
+                   em:version="0.70"
+                   em:description="Watching your Amazon items for stock and price changes, so you can &quot;Buy It Later&quot;."
+                   em:creator="Joshua McKenty; http://www.cognition.ca"
+                   em:homepageURL="http://buylater.cognition.ca"
+                   em:optionsURL="chrome://buylater/content/options.xul">
+    <em:targetApplication RDF:resource="rdf:#$C6+5G"/>
+    <em:targetApplication RDF:resource="rdf:#$H6+5G"/>
   </RDF:Description>
+  <Description RDF:about="rdf:#$H6+5G"
+                   em:id="{a463f10c-3994-11da-9945-000d60ca027b}"
+                   em:minVersion="0.5"
+                   em:maxVersion="1.4.*" />
 </RDF:RDF>
