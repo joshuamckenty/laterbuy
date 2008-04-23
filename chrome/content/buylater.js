@@ -1,43 +1,75 @@
+/*
 const USURL = "buylaterv2.cognition.ca";
 const CAURL = "buylaterv2ca.cognition.ca";
 const UKURL = "buylaterv2uk.cognition.ca";
+const DEURL = "buylaterv2de.cognition.ca";
+const RAWURL = "cognition.ca";
+*/
+const RAWURL = "localhost";
+const USURL = "localhost";
+
 var lb_prefs = null;
 
-window.addEventListener("load", function () {
-  var appcontent = window.document.getElementById("appcontent");
-  if (appcontent) {
-    if (!appcontent.greased_buylater) {
-      appcontent.greased_buylater = true;
-      lb_prefs = Components.classes['@mozilla.org/preferences-service;1']
-         .getService(Components.interfaces.nsIPrefService)
-         .getBranch('extensions.buylater.');
-      var lastVersion = lb_prefs.getCharPref("lastversion");
-      if (lastVersion == "firstrun") {
-        window.openDialog("chrome://buylater/content/options.xul");
+var bl_controller = {
+  version: Cc["@mozilla.org/extensions/manager;1"]
+           .getService(Ci.nsIExtensionManager)
+           .getItemForID("{5bf4e017-d36a-4fc2-b99e-e9abb6b1f2f4}").version,
+  SHOW_DELAY: 500,         
+  onload: function() {
+    lb_prefs = Components.classes['@mozilla.org/preferences-service;1']
+       .getService(Components.interfaces.nsIPrefService)
+       .getBranch('extensions.buylater.');
+    var appcontent = window.document.getElementById("appcontent");
+    if (appcontent) {
+      if (!appcontent.greased_buylater) {    
+        var pageURL;
+        var lastVersion = lb_prefs.getCharPref("lastversion");
+        if (lastVersion == "firstrun") {
+          window.openDialog("chrome://buylater/content/options.xul");
+          if (lb_prefs.getPrefType("firstRunURL")) pageURL = lb_prefs.getCharPref("firstRunURL");
+        } else if (lastVersion != bl_controller.version) {
+          if (lb_prefs.getPrefType("upgradeURL")) pageURL = lb_prefs.getCharPref("upgradeURL");
+        }
+
+        lb_prefs.setCharPref("lastversion", bl_controller.version);
+        if (pageURL && pageURL != "null") {
+          setTimeout(function(){window.openUILinkIn(pageURL, "tab")}, this.SHOW_DELAY);
+        }
+
+        appcontent.greased_buylater = true;
+        if (!lb_prefs.getPrefType("userpass") || lb_prefs.getCharPref("userpass") == "") {
+          lb_prefs.setCharPref("userpass", randomPassword(9)); 
+        }
+        appcontent.addEventListener("DOMContentLoaded", do_buylater, false);
       }
-      if (!lb_prefs.getPrefType("userpass") || lb_prefs.getCharPref("userpass") == "") {
-        lb_prefs.setCharPref("userpass", randomPassword(9)); 
-      }
-      lb_prefs.setCharPref("lastversion", "0.7"); // TODO - extension manager here, please
-      appcontent.addEventListener("DOMContentLoaded", do_buylater, false);
     }
   }
-}, false);
+}
+
+window.addEventListener("load", bl_controller.onload, false);
 
 function buylater_gui(aDocument, aASIN) {
   
   var parent = aDocument.getElementById("buyboxDivId");
+  if (!parent) {
+    var wishlist = aDocument.getElementById("wishlist_btn_div_js");
+    if (wishlist) {
+      parent = wishlist.parentNode;  
+    } 
+  }
   if (parent) {
+    var inst = this;
+    
     var email = "";
     if (lb_prefs.getPrefType("emailaddress")) {
       email = lb_prefs.getCharPref("emailaddress");
     } 
-    var inst = this;
     
     var href = aDocument.location.href;
     var BASEURL = USURL;
     if (href.indexOf('amazon.ca') > -1) BASEURL = CAURL;
     if (href.indexOf('amazon.co.uk') > -1) BASEURL = UKURL;
+    if (href.indexOf('amazon.de') > -1) BASEURL = DEURL;
     
     var div = aDocument.createElement("div");
     div.setAttribute("style", "margin-left: 26px; margin-right: 38px; margin-top: 6px; cursor: pointer;");
@@ -46,6 +78,9 @@ function buylater_gui(aDocument, aASIN) {
     img.id = "buylaterimg";
     div.appendChild(img);
     div.onclick = function (aEvt) {
+      if (lb_prefs.getPrefType("emailaddress")) {
+        email = lb_prefs.getCharPref("emailaddress");
+      } 
       var userpass = lb_prefs.getCharPref("userpass");
       if (email) {
         inst.sendRequest(inst.makeRequest(BASEURL, aASIN, email, userpass), aDocument);
@@ -53,7 +88,10 @@ function buylater_gui(aDocument, aASIN) {
         window.openDialog("chrome://buylater/content/options.xul"); 
       }
     };
-    parent.appendChild(div);
+    /* if (wishlist)
+     parent.insertBefore(div, parent.firstChild);
+    else */
+     parent.appendChild(div);
   }
 }
 
@@ -120,13 +158,14 @@ function DECORATE_ACTIONS(aDocument) {
 
 function GET_ASIN(aDocument) {
   var href = aDocument.location.href;
-  if (href.indexOf("cognition.ca") > -1) {
+  if (href.indexOf(RAWURL) > -1) {
     DECORATE_ACTIONS(aDocument);
   } 
   
   if ((href.indexOf('amazon.com') > -1) ||
      (href.indexOf('amazon.ca') > -1) ||
-     (href.indexOf('amazon.co.uk') > -1)) {
+     (href.indexOf('amazon.co.uk') > -1) ||
+     (href.indexOf('amazon.de') > -1)) {
     var asinNode = aDocument.getElementById('ASIN');
     if (asinNode) return asinNode.value;
   }

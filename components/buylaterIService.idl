@@ -1,0 +1,11 @@
+/*
+BuyLater License Block
+*/
+
+#include "nsISupports.idl"
+
+[scriptable, uuid(8304b0fb-e86a-4e37-99e5-e5120da571b2)]
+interface buylaterIService : nsISupports
+{
+	
+};
